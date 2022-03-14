@@ -3,90 +3,68 @@ class Soldier {
   constructor (health, strength){
       this.health = health;
       this.strength = strength;
-      this.attack();
-      this.receiveDamage();
     }
 
-    //method attack
-    // 0 args
-    // ret strength of the soldier
     attack(){
-      return this.strength
+      return this.strength;
     }
 
-    //method receiveDamage
-    // 1 arg = damage
-    // removes received damage from health
     receiveDamage(damage){
-
+      this.health=this.health-damage;
     }
   }
-
 
 // Viking
 
 class Viking extends Soldier {
   constructor (name, health, strength){
-    super(health, strength, receiveDamage());
-    this.name;
-    this.battleCry();
+    super(health, strength);
+    this.name = name; 
   }
+
   receiveDamage(damage){
-    // removes received damage from health property
-    //! if viking is still alive ret:
-    // NAME has received DAMAGE points of damage
-    //! if viking dies ret:
-    // NAME has died in act of combat
+    this.health=this.health-damage;
+    if(this.health>0){
+      return `${this.name} has received ${damage} points of damage`; 
+    }else if(this.health==0){
+      return `${this.name} has died in act of combat`;
+    }
   }
 
   battleCry(){
-    return "Odin Iwns You All!"
+    return 'Odin Owns You All!';
   }
 }
 
 // Saxon
 class Saxon extends Soldier {
   constructor (health, strength){
-    super(health, strength, receiveDamage());
+    super(health, strength);
   }
   receiveDamage(damage){
-    // removes received damage from health property
-    //! if saxon is still alive ret:
-    // A Saxon has received DAMAGE points of damage
-    //! if saxon dies ret:
-    // A Saxon has died in combat
+    this.health=this.health-damage;
+    if(this.health>0){
+      return `A Saxon has received ${damage} points of damage`; 
+    }else if(this.health==0){
+      return `A Saxon has died in combat`;
+    }
   }
 }
 
 // War
 class War {
   constructor(){
-    this.addViking();
-    this.addSaxon();
-    this.vikingAttack();
-    this.saxonAttack();
-    this.showStatus();
+    this.vikingArmy=[];
+    this.saxonArmy=[];
   }
 
-  /* Adds 1 `Viking` to the `vikingArmy`. 
-  If you want a 10 `Viking` army, 
-  you need to call this 10 times.
+  addViking(Viking){
+    this.vikingArmy.push(Viking);
+  }
 
-- should be a function
-- should receive **1 argument** (a `Viking` object)
-- should add the received `Viking` to the army
-- **shouldn't return** anything 
-*/
-  addViking();
-
-  /* The `Saxon` version of `addViking()`.
-
-- should be a function
-- should receive **1 argument** (a `Saxon` object)
-- should add the received `Saxon` to the army
-- **shouldn't return** anything 
-*/
-  addSaxon();
+  addSaxon(Saxon){
+    this.saxonArmy.push(Saxon);
+  }
 
 /* A `Saxon` (chosen at random) has their 
 `receiveDamage()` method called 
@@ -103,7 +81,13 @@ and the `Saxon` doesn't get to attack back.
 - should return **result of calling `receiveDamage()` 
   of a `Saxon`** with the `strength` of a `Viking`
  */
-  vikingAttack();
+  vikingAttack(){
+    let pickViking=0;
+    let pickSaxon=0;
+
+
+    return //result of calling receiveDamage();
+  }
 
   /* The `Saxon` version of `vikingAttack()`. 
   A `Viking` receives the damage equal to the `strength` 
@@ -117,7 +101,12 @@ and the `Saxon` doesn't get to attack back.
 - should return **result of calling `receiveDamage()` 
   of a `Viking`** with the `strength` of a `Saxon`
  */
-  saxonAttack();
+  saxonAttack(){
+
+
+
+    return //result of calling receiveDamage()
+  }
 
   /* 
   Returns the current status of the `War` based on the size of the armies.
@@ -131,7 +120,15 @@ and the `Saxon` doesn't get to attack back.
 - **if there are at least 1 `Viking` and 1 `Saxon`**, 
   should return **_"Vikings and Saxons are still in the thick of battle."_**
    */
-  showStatus();
+  showStatus(){
+    if(saxonArmy.length==0){
+      return "Vikings have won the war of the century!";
+    }else if(vikingArmy.length==0){
+      return "Saxons have fought for their lives and survived another day...";
+    }else if((vikingArmy.length>0)&&(saxonArmy.length>=0)){
+      return "Vikings and Saxons are still in the thick of battle.";
+    }
+  }
 }
 
 
